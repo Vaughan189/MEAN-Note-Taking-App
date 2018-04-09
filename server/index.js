@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-
+var cors = require('cors');
 // create express app
 var app = express();
 
@@ -25,9 +25,13 @@ mongoose.connection.open('open', function() {
     console.log("Successfully connected to the database");
 });
 
-
+app.use(cors());
 // define a simple route
 app.get('/', function(req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
     res.json({ "message": "Welcome to EasyNotes application. Take notes quickly. Organize and keep track of all your notes." });
 });
 
